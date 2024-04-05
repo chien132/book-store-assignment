@@ -1,3 +1,4 @@
+import Header from "@/components/header/Header";
 import { Layout } from "antd";
 import { ReactNode } from "react";
 const { Content } = Layout;
@@ -11,9 +12,8 @@ const LayoutA = (props: LayoutAProps) => {
 
   return (
     <Layout>
-      <Layout>
-        <Content>{children}</Content>
-      </Layout>
+      <Header />
+      <Content className="px-16 py-8 mt-16">{children}</Content>
     </Layout>
   );
 };
