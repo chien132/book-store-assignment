@@ -1,3 +1,4 @@
+import { BookGenreParams, BookSearchParams } from "@/types/Book";
 import axios, { AxiosResponse } from "axios";
 
 const API = {
@@ -17,8 +18,9 @@ const API = {
       LOGIN: "/example/login",
     },
     BOOK: {
-      SEARCH:
-        "https://openlibrary.org/search.json?q=house%20of%20leaves&limit=16",
+      SEARCH: `https://openlibrary.org/search.json`,
+      GENRE: (genre: string) =>
+        `https://openlibrary.org/subjects/${genre}.json`,
       FAVORITES:
         "https://openlibrary.org/people/chienne7781/books/want-to-read.json",
     },
@@ -29,8 +31,23 @@ const API = {
     },
   },
   book: {
-    search: (): Promise<AxiosResponse> => {
-      return API.apiInstance.get(API.API_PATH.BOOK.SEARCH);
+    search: (params: BookSearchParams): Promise<AxiosResponse> => {
+      return API.apiInstance.get(API.API_PATH.BOOK.SEARCH, {
+        params: {
+          q: params.q,
+          fields: "title,cover_i,author_name,first_publish_year",
+          limit: params.limit,
+          page: params.page,
+        },
+      });
+    },
+    getByGenre: (params: BookGenreParams): Promise<AxiosResponse> => {
+      return API.apiInstance.get(API.API_PATH.BOOK.GENRE(params.genre), {
+        params: {
+          offset: params.offset,
+          limit: params.limit,
+        },
+      });
     },
     getFavorites: (): Promise<AxiosResponse> => {
       return API.apiInstance.get(API.API_PATH.BOOK.FAVORITES);

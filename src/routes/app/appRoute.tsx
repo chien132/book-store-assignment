@@ -17,6 +17,10 @@ const appRoute = () => {
       element: <Homepage />,
     },
     {
+      path: "/search",
+      element: <Homepage />,
+    },
+    {
       path: "/dashboard",
       element: <Dashboard />,
     },

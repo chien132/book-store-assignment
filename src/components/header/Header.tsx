@@ -39,9 +39,8 @@ const Header = () => {
             className="text-gray-700 transition-colors duration-300 transform hover:text-blue-500 mx-4 my-0"
             to={"/favorites"}
           >
-            {" "}
             Favorites
-            <ThumbUpOutlinedIcon className="mx-5"></ThumbUpOutlinedIcon>
+            <ThumbUpOutlinedIcon className="mx-1 max-h-4" />
             {/* <span className="absolute top-0 left-0 p-1 text-xs text-white bg-blue-500 rounded-full"></span> */}
           </NavLink>
         </div>

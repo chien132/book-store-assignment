@@ -13,7 +13,7 @@ const LayoutA = (props: LayoutAProps) => {
   return (
     <Layout>
       <Header />
-      <Content className="px-16 py-8 mt-16">{children}</Content>
+      <Content className="px-52 py-8 mt-16">{children}</Content>
     </Layout>
   );
 };
