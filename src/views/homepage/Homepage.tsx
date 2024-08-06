@@ -13,7 +13,7 @@ const Homepage = () => {
   // const [books, setBooks] = useState([]);
   const [bookSearchParams, setBookSearchParams] = useState<BookSearchParams>({
     q: "cat",
-    limit: 8,
+    limit: 12,
     page: 1,
     total: 0,
   });
@@ -25,17 +25,16 @@ const Homepage = () => {
   useEffect(() => {
     // console.log(bookSearchParams);
     if (appState.genre !== "") {
-      console.log(appState.genre);
       API.book
         .getByGenre({
           genre: appState.genre,
-          offset: 0,
+          offset: (bookSearchParams.page - 1) * bookSearchParams.limit,
           limit: bookSearchParams.limit,
         })
         .then(
           (res) => {
             const resData = res.data.works;
-            console.log(resData);
+            bookSearchParams.total = res.data.work_count;
             dispatch(
               loadBook(
                 resData.map((book: BookByGenre) => ({
@@ -77,16 +76,10 @@ const Homepage = () => {
   };
 
   const onSizeChange = (current: number, size: number) => {
-    console.log(size, current);
-
-    setBookSearchParams((prev) => {
-      const newValue = {
-        ...prev,
-        limit: size,
-        page: current,
-      };
-      console.log(newValue);
-      return newValue;
+    setBookSearchParams({
+      ...bookSearchParams,
+      limit: size,
+      page: current,
     });
   };
 
@@ -99,7 +92,7 @@ const Homepage = () => {
       <div className="grid grid-cols-4">
         <Category />
         <div className="col-span-3">
-          <div className="grid grid-cols-2">
+          <div className="grid grid-cols-3">
             <div className="ml-0 my-2">
               <div className="relative max-w-sm">
                 <div className="absolute inset-y-0 start-0 flex items-center ps-3">
@@ -116,7 +109,7 @@ const Homepage = () => {
               <Pagination
                 current={bookSearchParams.page}
                 defaultCurrent={1}
-                className="m-auto mr-0"
+                className="m-auto mr-0 col-span-2"
                 onChange={onPageSelect}
                 showSizeChanger={false}
                 pageSize={bookSearchParams.limit}

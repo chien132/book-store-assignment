@@ -1,3 +1,5 @@
+import Banner from "@/components/header/Banner";
+import Footer from "@/components/header/Footer";
 import Header from "@/components/header/Header";
 import { Layout } from "antd";
 import { ReactNode } from "react";
@@ -13,7 +15,9 @@ const LayoutA = (props: LayoutAProps) => {
   return (
     <Layout>
       <Header />
-      <Content className="px-52 py-8 mt-16">{children}</Content>
+      <Banner />
+      <Content className="px-52 py-8">{children}</Content>
+      <Footer />
     </Layout>
   );
 };

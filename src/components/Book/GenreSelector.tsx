@@ -20,7 +20,7 @@ const GenreSelector = () => {
   };
 
   return (
-    <div className="ps-10 h-full px-3 py-4 overflow-y-auto">
+    <div className="ps-10 h-full px-3 py-4 overflow-y-auto border-solid border-gray-700 ">
       <div className="text-xl ps-2 py-2">Book Genres</div>
       <ul className="space-y-2 font-medium">
         {genres.map((genre) => {
